@@ -1,4 +1,4 @@
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 import pytest
 import pandas as pd
 from src.question_5 import get_tumor_stats, run_statistical_test, distribution_plot, calculate_cramers_v

@@ -1,6 +1,7 @@
 from src.clean_data import load_data, clean_data
 from src.question_2 import calc_correlation, plot_result
 from src.question_3 import calc_spearman_gender_survival, plot_survival_by_gender
+from src.question_4 import outcome_distribution, summarize_probabilities, plot_histograms
 from src.question_5 import get_tumor_stats, run_statistical_test, calculate_cramers_v, distribution_plot
 
 # Define the input file path
@@ -26,7 +27,10 @@ def main():
         plot_survival_by_gender(dataset)
         
         # Question 4: Can we predict the treatment outcome based on the chosen treatment?
-        
+        print("\n\n--- Can we predict the treatment outcome based on the chosen treatment? ---\n")
+        probabilities = outcome_distribution(dataset)
+        summarize_probabilities(probabilities)
+        plot_histograms(dataset)
         
         # Question 5: Can tumor type predict the tumor grade at initial diagnosis?
         # Calculate statistics (Counts and Percentages)

@@ -30,6 +30,8 @@ def run_statistical_test(contingency_table):
         print(f"Conclusion: Significant relationship found (p = {p_val:.4f})")
     else:
         print(f"Conclusion: No significant relationship found (p = {p_val:.4f})")
+    
+    return p_val
 
 
 def calculate_cramers_v(contingency_table):
@@ -46,6 +48,8 @@ def calculate_cramers_v(contingency_table):
     # Formula for Cramer's V accounts for the dimensions of the table
     v = np.sqrt(phi2 / min(rows - 1, cols - 1))
     print(f"Cramer's V calculated: {v:.4f}")
+    
+    return v
 
 
 def distribution_plot(df):
