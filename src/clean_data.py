@@ -21,16 +21,16 @@ def clean_data(df):
         return None
         
     df = df.copy()
+    # Remove duplicate rows to ensure data integrity
     df = df.drop_duplicates()
     
+    # Logic: If 'Time to Recurrence' exists -> Recurrence = 1. If it is NaN -> Recurrence = 0.
+    # This creates our binary target variable for prediction.
     if "Time to Recurrence (months)" in df.columns:
         df["Recurrence"] = df["Time to Recurrence (months)"].notna().astype(int)
     
+    # Fill missing values in 'Recurrence Site' with a placeholder instead of dropping them.
     if "Recurrence Site" in df.columns:
         df["Recurrence Site"] = df["Recurrence Site"].fillna("No Recurrence")
-
-    critical_features = ["Tumor Location", "Tumor Grade", "Tumor Type", "Treatment", "Age"]
-    existing_features = [col for col in critical_features if col in df.columns]
-    df = df.dropna(subset=existing_features)
     
     return df

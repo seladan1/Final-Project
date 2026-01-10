@@ -94,7 +94,4 @@ def distribution_plot(df):
     plt.legend(title="Predicted Grade", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
     
-    # manager = plt.get_current_fig_manager()
-    # manager.window.wm_geometry("+200+100")
-    
     plt.show()

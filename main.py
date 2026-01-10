@@ -38,15 +38,11 @@ def main():
         plot_histograms(dataset)
         
         # Question 5: Can tumor type predict the tumor grade at initial diagnosis?
-        # Calculate statistics (Counts and Percentages)
         contingency, percentages = get_tumor_stats(dataset)
-        
-        # Statistical Inference
+    
         print("\n\n--- Can tumor type predict the tumor grade at initial diagnosis? ---\n")
         run_statistical_test(contingency)
         calculate_cramers_v(contingency)
-        
-        # Data Visualization
         distribution_plot(dataset)
         
     else:

@@ -26,6 +26,7 @@ def plot_histograms(df):
         plt.ylabel("Count")
         plt.tight_layout()
         
+        # Fix the window position to avoid visual jumping on screen.
         manager = plt.get_current_fig_manager()
         manager.window.wm_geometry("+200+100")
     

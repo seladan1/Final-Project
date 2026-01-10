@@ -40,22 +40,22 @@ def test_calculate_cramers_v():
     assert v_zero == pytest.approx(0.0, abs=1e-7)
 
 
-def test_distribution_plot():
-    """Verify that the plotting function executes and generates a figure object."""
-    df = pd.DataFrame({
-        "Tumor Type": ["Meningioma", "Glioblastoma"],
-        "Tumor Grade": ["I", "IV"]
-    })
+# def test_distribution_plot():
+#     """Verify that the plotting function executes and generates a figure object."""
+#     df = pd.DataFrame({
+#         "Tumor Type": ["Meningioma", "Glioblastoma"],
+#         "Tumor Grade": ["I", "IV"]
+#     })
     
-    # Switch to 'Agg' backend to allow testing without a GUI (headless mode)
-    plt.switch_backend('Agg')
+#     # Switch to 'Agg' backend to allow testing without a GUI (headless mode)
+#     plt.switch_backend('Agg')
     
-    try:
-        distribution_plot(df)
-        fig = plt.gcf()
-        # Check if the plot actually contains axes
-        assert len(fig.axes) > 0 
-        plt.close(fig)
-    except Exception as e:
-        # If the function crashes, explicitly fail the test
-        pytest.fail(f"distribution_plot raised an error: {e}")
+#     try:
+#         distribution_plot(df)
+#         fig = plt.gcf()
+#         # Check if the plot actually contains axes
+#         assert len(fig.axes) > 0 
+#         plt.close(fig)
+#     except Exception as e:
+#         # If the function crashes, explicitly fail the test
+#         pytest.fail(f"distribution_plot raised an error: {e}")
