@@ -59,7 +59,7 @@ def distribution_plot(df):
     
     param df: Input DataFrame.
     """
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(10, 6))
     # Normalize by index to ensure each bar represents 100%
     plot_data = (
         pd.crosstab(df["Tumor Type"], df["Tumor Grade"], normalize="index") * 100
@@ -93,5 +93,8 @@ def distribution_plot(df):
     plt.xlabel("Tumor Type", fontsize=12, labelpad=10)
     plt.legend(title="Predicted Grade", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
-    #plt.savefig('tumor_grade_distribution.png')
+    
+    # manager = plt.get_current_fig_manager()
+    # manager.window.wm_geometry("+200+100")
+    
     plt.show()

@@ -1,23 +1,52 @@
 import pytest
 import pandas as pd
-from src.clean_data import load_data, clean_data
+import numpy as np
+from src.clean_data import clean_data
 
-def test_load_data_invalid_path():
-    """Verify that the loader gracefully handles non-existent files."""
-    assert load_data("non_existent.csv") is None
+@pytest.fixture
+def raw_data():
+    return pd.DataFrame({
+        'Patient ID': [1, 2, 3, 4, 1], 
+        'Age': [50, 60, np.nan, 45, 50], 
+        'Tumor Type': ['Glioblastoma', 'Meningioma', 'Astrocytoma', 'Meningioma', 'Glioblastoma'],
+        'Tumor Grade': ['IV', 'I', 'II', 'I', 'IV'],
+        'Tumor Location': ['Frontal', 'Parietal', 'Temporal', 'Occipital', 'Frontal'],
+        'Treatment': ['Surgery', 'Surgery', 'Chemo', 'Radiation', 'Surgery'],
+        'Time to Recurrence (months)': [10.0, np.nan, 15.0, np.nan, 10.0],
+        'Recurrence Site': ['Temporal', np.nan, 'Frontal', np.nan, 'Temporal']
+    })
 
+def test_remove_duplicates(raw_data):
+    df_clean = clean_data(raw_data)
+    assert len(df_clean) == 3 
 
-def test_age_empty():
-    empty_df = pd.DataFrame(columns=['Age', 'Survival Time (months)'])
-    # אנחנו מצפים שזה יעלה שגיאה או יחזיר פלט ריק, תלוי בהתנהגות הרצויה
-    with pytest.raises(Exception):
-        clean_data(empty_df)
+def test_recurrence_logic_creation(raw_data):
+    df_clean = clean_data(raw_data)
+    
+    assert 'Recurrence' in df_clean.columns
 
+    row_with_recurrence = df_clean[df_clean['Patient ID'] == 1].iloc[0]
+    row_healthy = df_clean[df_clean['Patient ID'] == 2].iloc[0]
+    
+    assert row_with_recurrence['Recurrence'] == 1
+    assert row_healthy['Recurrence'] == 0
 
-# def test_missing_required_column():
-#     # Missing column should raise KeyError
+def test_recurrence_site_fill(raw_data):
+    df_clean = clean_data(raw_data)
+    
+    row_healthy = df_clean[df_clean['Patient ID'] == 2].iloc[0]
+    assert row_healthy['Recurrence Site'] == 'No Recurrence'
 
-#     df = pd.DataFrame({"Gender": ["Male", "Female"]})
+def test_critical_missing_values_dropped(raw_data):
+    df_clean = clean_data(raw_data)
+    
+    assert 3 not in df_clean['Patient ID'].values
 
-#     with pytest.raises(KeyError):
-#         calc_spearman_gender_survival(df)
+def test_healthy_patients_kept(raw_data):
+    df_clean = clean_data(raw_data)
+    
+    assert 2 in df_clean['Patient ID'].values
+    assert pd.isna(df_clean[df_clean['Patient ID'] == 2]['Time to Recurrence (months)'].iloc[0])
+
+def test_none_input():
+    assert clean_data(None) is None

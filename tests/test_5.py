@@ -39,6 +39,7 @@ def test_calculate_cramers_v():
     # Using abs=1e-7 because floating point math often returns tiny non-zero values
     assert v_zero == pytest.approx(0.0, abs=1e-7)
 
+
 def test_distribution_plot():
     """Verify that the plotting function executes and generates a figure object."""
     df = pd.DataFrame({

@@ -1,4 +1,8 @@
+import matplotlib
+matplotlib.use('TkAgg')
+
 from src.clean_data import load_data, clean_data
+from src.predict_recurrence_gui import run_gui
 from src.question_2 import calc_correlation, plot_result
 from src.question_3 import calc_spearman_gender_survival, plot_survival_by_gender
 from src.question_4 import outcome_distribution, summarize_probabilities, plot_histograms
@@ -14,7 +18,8 @@ def main():
     
     if dataset is not None:
         # Question 1: Can we predict the chances of a tumor recurrence and the recurrence site based on its initial location?
-        
+        print("\n\n--- Can we predict the chances of a tumor recurrence and the recurrence site based on its initial location? ---\n")
+        run_gui(dataset)
         
         # Question 2: Is there a correlation between the survival time and the age of the patient (at the time of diagnosis)?
         print("\n\n--- Is there a correlation between the survival time and the age of the patient (at the time of diagnosis)? ---\n")

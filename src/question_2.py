@@ -25,5 +25,9 @@ def plot_result(grouped_df):
     plt.xlabel('Age at Diagnosis')
     plt.ylabel('Mean Survival Time (months)')
     plt.grid(True, linestyle='--', alpha=0.6)
+    
+    manager = plt.get_current_fig_manager()
+    manager.window.wm_geometry("+200+100")
+    
     plt.show()
 

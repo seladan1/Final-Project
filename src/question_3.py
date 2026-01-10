@@ -48,6 +48,9 @@ def plot_survival_by_gender(df):
     plt.xlabel("Gender")
     plt.ylabel("Survival Time (months)")
     plt.grid(axis='y', linestyle='--', alpha=0.7)
+    
+    manager = plt.get_current_fig_manager()
+    manager.window.wm_geometry("+200+100")
 
     plt.show()
 

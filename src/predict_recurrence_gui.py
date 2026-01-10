@@ -1,8 +1,16 @@
-import pandas as pd
-from gui_graphic_utils import *
+from src.gui_graphic_utils import *
 from tkinter import messagebox
 
+df = None
+# columns used. why was age not used? age = machine learning, we can't treat age as a drop-down select variable.
+features = ["Tumor Location", "Tumor Grade", "Tumor Type", "Treatment"]
+gui_vars = {}
+legend_labels = {}
+match_label = None
+legend_frame = None
+
 def predict_recurrence(): # predicting tumor recurrence! (predicting in quotes because there is no usage of ml)
+    global df, gui_vars, features
     df_copy = df.copy() #lets not ruin the original df
     for col in features:
         df_copy = df_copy[df_copy[col] == gui_vars[col].get()] #change df[copy] to be the selected var in gui
@@ -14,9 +22,11 @@ def predict_recurrence(): # predicting tumor recurrence! (predicting in quotes b
     probability = df_copy["Recurrence"].mean() * 100 #basic probability calculation
     messagebox.showinfo("Result",f"Predicted recurrence probability: {probability:.1f}%\n"
         f"Based on {len(df_copy)} similar patients") #messagebox pop
+    
     return probability
 
 def update_legend(*args): # updating (dynamic) legend when selecting a new gui string var
+    global df, gui_vars, features, legend_labels, match_label
     for col in features:
         value = gui_vars[col].get() #select chosen var in gui
         count = len(df[df[col] == value]) #calculate how many patients with this value (len of selected df)
@@ -28,22 +38,17 @@ def update_legend(*args): # updating (dynamic) legend when selecting a new gui s
 
     match_label.config(text=f"matching all selections: {len(df_copy)} cases") #update the intersection of all 4 vars
 
-##########################################################################################
-if __name__ == "__main__":
 
-    df = pd.read_csv("../BrainTumor.csv")
-
+def run_gui(external_df):
+    global df, gui_vars, legend_labels, match_label, features, legend_frame
+    df = external_df.copy()
     # we defined recurrence as - time to recurrence is null 0, time to recurrence isn't null 1
     df["Recurrence"] = df["Time to Recurrence (months)"].notna().astype(int)
-
-    # columns used. why was age not used? age = machine learning, we can't treat age as a drop-down select variable.
-    features = ["Tumor Location", "Tumor Grade", "Tumor Type", "Treatment"]
 
     root = tk.Tk()  # constructor, creates the window
     root.title("brain tumor prediction")
 
     # create the string vars for the gui using StringVar's constructor.
-    gui_vars = {}
     for feature in features:
         gui_vars[feature] = tk.StringVar()
 
@@ -62,4 +67,3 @@ if __name__ == "__main__":
      .grid(row=1, column=0, columnspan=2, pady=25))  # build gui button
 
     root.mainloop()  # run gui
-

@@ -25,6 +25,10 @@ def plot_histograms(df):
         plt.xlabel("Treatment Outcome")
         plt.ylabel("Count")
         plt.tight_layout()
+        
+        manager = plt.get_current_fig_manager()
+        manager.window.wm_geometry("+200+100")
+    
         plt.show()
 
 
@@ -39,9 +43,3 @@ def summarize_probabilities(probabilities):
 
     print(f"\nConclusion: The most successful treatment is '{best_treatment}' with "
           f"{best_prob}% chance of the best outcome")
-
-# if __name__ == "__main__":
-#     df = pd.read_csv("../BrainTumor.csv")
-#     probabilities = outcome_distribution(df)
-#     summarize_probabilities(probabilities)
-#     plot_histograms(df)
