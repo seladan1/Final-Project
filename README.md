@@ -63,7 +63,7 @@ The analysis is based on a clinical dataset including the following key paramete
 | **Treatment Outcome** | Clinical result of the chosen treatment. |
 | **Survival Time** | Total survival measured in months. |
 
-**Link to the Dataset:** https://www.kaggle.com/datasets/thegoanpanda/brain-tumor-stage-based-recurrence-patterns/data [BrainTumor dataset](https://www.kaggle.com/datasets/thegoanpanda/brain-tumor-stage-based-recurrence-patterns/data)
+**Link to the Dataset:** [BrainTumor dataset](https://www.kaggle.com/datasets/thegoanpanda/brain-tumor-stage-based-recurrence-patterns/data)
 
 ---
 
