@@ -1,4 +1,4 @@
-# Brain Tumor Clinical Data Analysis
+# Brain Tumor Stage-Based Recurrence Data Analysis
 
 ## **Project Documentation**
 
@@ -68,7 +68,7 @@ The analysis is based on a clinical dataset including the following key paramete
 ---
 
 ## **References**
-* **Papers/Articles:** Missing.
+* **Papers/Articles:** Using only the Dataset.
 
 ---
 
