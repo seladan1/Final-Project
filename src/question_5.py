@@ -68,7 +68,7 @@ def distribution_plot(df):
     ax = plot_data.plot(
         kind="bar",
         stacked=True,
-        color=["#4dabf7", "#3bc9db", "#38d9a9", "#69db7c"],
+        color=["#ca4df7", "#db3b3b", "#d99638", "#69db7c"],
         rot=0,
         ax=plt.gca(),
     )
@@ -95,3 +95,4 @@ def distribution_plot(df):
     plt.tight_layout()
     
     plt.show()
+
