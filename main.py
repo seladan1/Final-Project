@@ -4,7 +4,7 @@ matplotlib.use('TkAgg')
 from src.clean_data import load_data, clean_data
 from src.predict_recurrence_gui import run_gui
 from src.question_2 import calc_correlation, plot_result
-from src.question_3 import calc_spearman_gender_survival, plot_survival_by_gender
+from src.question_3 import calc_spearman_gender_survival, plot_survival_by_gender, analyze_long_survivors
 from src.question_4 import outcome_distribution, summarize_probabilities, plot_histograms
 from src.question_5 import get_tumor_stats, run_statistical_test, calculate_cramers_v, distribution_plot
 
@@ -30,6 +30,7 @@ def main():
         print("\n\n--- Is there a connection between the survival time and the patient's gender? ---\n")
         calc_spearman_gender_survival(dataset)
         plot_survival_by_gender(dataset)
+        analyze_long_survivors(dataset)
         
         # Question 4: Can we predict the treatment outcome based on the chosen treatment?
         print("\n\n--- Can we predict the treatment outcome based on the chosen treatment? ---\n")
