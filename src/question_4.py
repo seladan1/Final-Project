@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 
 def outcome_distribution(df):
 
@@ -24,8 +25,9 @@ def plot_histograms(df):
         plt.title(f"Outcome for Treatment: {treatment}, total {counts.sum()}")
         plt.xlabel("Treatment Outcome")
         plt.ylabel("Count")
+        plt.gca().yaxis.set_major_locator(MaxNLocator(integer =True))
         plt.tight_layout()
-        
+
         # Fix the window position to avoid visual jumping on screen.
         manager = plt.get_current_fig_manager()
         manager.window.wm_geometry("+200+100")
